@@ -60,7 +60,7 @@ class MyVector
         theCapacity{rhs.size() + SPARE_CAPACITY}
     {
         // code begins
-        
+        data = new DataType{*rhs.data()};
         // code ends 
     }
 
@@ -112,7 +112,7 @@ class MyVector
             return;
         }
 
-        data *newArray = new DataType[newCapacity];
+        DataType *newArray = new DataType[newCapacity];
         for(int k = 0; k < theSize; ++k){
             newArray[k] = std::move(data[k]);
         }
@@ -186,7 +186,14 @@ class MyVector
     MyVector<DataType>& append(MyVector<DataType> && rhs)
     {
         // code begins
-        
+        if(theCapacity < theSize+rhs.size()){
+            reserve(2 * (theSize+rhs.size()));
+        }
+        for(int i = 0; i < rhs.size(); ++i){
+                data[i+theSize] = rhs[i];
+        }
+            theSize += rhs.size();
+            return *this;
         // code ends
     }
 
