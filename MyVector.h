@@ -60,7 +60,10 @@ class MyVector
         theCapacity{rhs.size() + SPARE_CAPACITY}
     {
         // code begins
-        data = new DataType{*rhs.data()};
+        data = new DataType[theCapacity];
+        for(int k = 0; k < theSize; ++k){
+            data[k] = rhs[k];
+        }
         // code ends 
     }
 
@@ -192,10 +195,11 @@ class MyVector
         for(int i = 0; i < rhs.size(); ++i){
                 data[i+theSize] = rhs[i];
         }
-            theSize += rhs.size();
-            return *this;
+        theSize += rhs.size();
+        return *this;
         // code ends
     }
+    
 
     // remove the last data element from the array
     void pop_back()
