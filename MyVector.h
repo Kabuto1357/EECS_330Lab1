@@ -23,18 +23,18 @@ class MyVector
         theCapacity{initSize + SPARE_CAPACITY}
     {
         // code begins
-        data = new data[theCapacity];
+        data = new DataType[theCapacity];
         // code ends
     }
 
     // copy constructor
     MyVector(const MyVector & rhs) : 
         theSize{rhs.theSize},
-        theCapacity{rhs.theCapacity}
+        theCapacity{rhs.theCapacity},
         data{nullptr}
     {
         // code begins
-        data = new Object[theCapacity];
+        data = new DataType[theCapacity];
         for(int k = 0; k < theSize; ++k){
             data[k] = rhs.data[k];
         }
@@ -75,9 +75,9 @@ class MyVector
     MyVector & operator= (const MyVector& rhs)
     {
         // code begins
-        Vector copy = rhs;
-        std::swap(*this, copy);
-        return *this
+        MyVector copy = rhs;
+        std::swap(*this, std::copy);
+        return *this;
         // code ends
     }
 
@@ -85,11 +85,11 @@ class MyVector
     MyVector & operator= (MyVector && rhs)
     {
         // code begins
-        std:swap(theSize, rhs.theSize);
+        std::swap(theSize, rhs.theSize);
         std::swap(theCapacity, rhs.theCapacity);
-        std:swap(data, rhs.data);
+        std::swap(data, rhs.data);
 
-        return *this
+        return *this;
         // code ends
     }
 
@@ -112,7 +112,7 @@ class MyVector
             return;
         }
 
-        data *newArray = new data[newCapacity];
+        data *newArray = new DataType[newCapacity];
         for(int k = 0; k < theSize; ++k){
             newArray[k] = std::move(data[k]);
         }
